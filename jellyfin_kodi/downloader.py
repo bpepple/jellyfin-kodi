@@ -129,7 +129,8 @@ def get_filtered_section(parent_id=None, media=None, limit=None, recursive=None,
 
 def get_movies_by_boxset(boxset_id):
 
-    yield from get_items(boxset_id, "Movie")
+    for items in get_items(boxset_id, "Movie"):
+        yield items
 
 
 def get_episode_by_show(show_id):
@@ -143,7 +144,8 @@ def get_episode_by_show(show_id):
             'Fields': api.info()
         }
     }
-    yield from _get_items(query)
+    for items in _get_items(query):
+        yield items
 
 
 def get_episode_by_season(show_id, season_id):
@@ -158,7 +160,8 @@ def get_episode_by_season(show_id, season_id):
             'Fields': api.info()
         }
     }
-    yield from _get_items(query)
+    for items in _get_items(query):
+        yield items
 
 
 def get_item_count(parent_id, item_type=None, params=None):
@@ -201,7 +204,8 @@ def get_items(parent_id, item_type=None, basic=False, params=None):
     if params:
         query['params'].update(params)
 
-    yield from _get_items(query)
+    for items in _get_items(query):
+        yield items
 
 
 def get_artists(parent_id=None):
@@ -223,7 +227,8 @@ def get_artists(parent_id=None):
         }
     }
 
-    yield from _get_items(query)
+    for items in _get_items(query):
+        yield items
 
 
 @stop
