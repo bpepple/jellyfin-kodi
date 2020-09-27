@@ -858,7 +858,7 @@ class WebSocketApp(object):
 
     def _send_ping(self, interval):
         while True:
-            for i in range(interval):
+            for _ in range(interval):
                 time.sleep(1)
                 if not self.keep_running:
                     return
