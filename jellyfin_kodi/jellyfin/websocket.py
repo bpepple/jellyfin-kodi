@@ -189,11 +189,7 @@ def _parse_url(url):
     else:
         raise ValueError("scheme %s is invalid" % scheme)
 
-    if parsed.path:
-        resource = parsed.path
-    else:
-        resource = "/"
-
+    resource = parsed.path if parsed.path else "/"
     if parsed.query:
         resource += "?" + parsed.query
 
@@ -837,10 +833,7 @@ class WebSocketApp(object):
          docstring for more information
         """
         self.url = url
-        if header is None:
-            self.header = []
-        else:
-            self.header = header
+        self.header = [] if header is None else header
         self.on_open = on_open
         self.on_message = on_message
         self.on_error = on_error
