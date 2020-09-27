@@ -521,10 +521,10 @@ class FullSync(object):
                 settings('MusicRescan.bool', False)
 
             if items:
-                count = 0
-
                 with self.library.music_database_lock if media == 'music' else self.library.database_lock:
                     with Database(media) as kodidb:
+
+                        count = 0
 
                         if library[1] == 'mixed':
 
