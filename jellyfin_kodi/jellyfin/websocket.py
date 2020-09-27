@@ -902,15 +902,14 @@ class WebSocketApp(object):
                 try:
                     data = self.sock.recv()
 
-                    if data is None or self.keep_running is False:
+                    if data is None or not self.keep_running:
                         break
                     self._callback(self.on_message, data)
 
                 except Exception as e:
-                    if "timed out" not in e.args[0]:
+                    if 'timed out' not in e.args[0]:
                         logger.exception(e)
                         raise e
-
         except Exception as e:
             logger.exception(e)
             self._callback(self.on_error, e)
