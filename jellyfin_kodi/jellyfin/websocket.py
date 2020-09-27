@@ -466,10 +466,7 @@ class WebSocket(object):
         self.sock.connect((hostname, port))
         if is_secure:
             if HAVE_SSL:
-                if self.sslopt is None:
-                    sslopt = {}
-                else:
-                    sslopt = self.sslopt
+                sslopt = {} if self.sslopt is None else self.sslopt
                 if ssl.HAS_SNI:
                     self.sock = _wrap_sni_socket(self.sock, sslopt, hostname)
                 else:
