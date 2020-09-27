@@ -704,11 +704,17 @@ class Actions(object):
 
             return False
 
-        if (not xbmc.getCondVisibility('Window.IsMedia') and ((item['Type'] == 'Audio' and not xbmc.getCondVisibility('Integer.IsGreater(Playlist.Length(music),1)')) or not xbmc.getCondVisibility('Integer.IsGreater(Playlist.Length(video),1)'))):
-
-            return True
-
-        return False
+        return not xbmc.getCondVisibility('Window.IsMedia') and (
+            (
+                item['Type'] == 'Audio'
+                and not xbmc.getCondVisibility(
+                    'Integer.IsGreater(Playlist.Length(music),1)'
+                )
+            )
+            or not xbmc.getCondVisibility(
+                'Integer.IsGreater(Playlist.Length(video),1)'
+            )
+        )
 
 
 class PlaylistWorker(threading.Thread):
